@@ -59,23 +59,54 @@ def matrixSize():
 
 matrix = numpy.zeros(matrixSize())
 
-matrixWidth = 0
-matrixHeight = 0
+for x in contents:
+    leftPointer = 0
+    rightPointer = 0
+    while x[leftPointer] != ' ':
+        leftPointer += 1
+
+    leftPointer = leftPointer + 3
+    rightPointer = leftPointer
+
+    while x[rightPointer] != ',':
+        rightPointer += 1
+
+    # hur långt från vänster den ska börrja
+    leftMargin = int(x[leftPointer:rightPointer])
 
 
-print(matrix)
+    rightPointer += 1
+    leftPointer = rightPointer
 
+    while x[rightPointer] != ':':
+        rightPointer += 1
 
+    # hur långt från toppen den ska börja
+    topMargin = int(x[leftPointer:rightPointer])
 
-    #print('height ', height)
+    rightPointer += 2
+    leftPointer = rightPointer
 
-    #for row in range(topMargin, height, 1):
-     #   for col in range(leftMargin, width, 1):
+    while x[rightPointer] != 'x':
+        rightPointer += 1
 
+    width = int(x[leftPointer:rightPointer])
 
+    rightPointer += 1
+    leftPointer = rightPointer
 
+    height = int(x[leftPointer:len(x)])
 
+    for row in range(topMargin, topMargin + height, 1):
+        for col in range(leftMargin, leftMargin + width, 1):
+           matrix[row, col] += 1
 
+count = 0
+for i in range(len(matrix)):
+    for j in range(len(matrix)):
+        if matrix[i][j] >= 2:
+            count += 1
+print(count)
 
 
 
